@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Merry Christmas 🎄</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background:
+        radial-gradient(circle at 20% 20%, #223b5a, #0b1622 60%),
+        radial-gradient(circle at 80% 30%, #1a2f4a, #0b1622 70%);
+      font-family: "Comic Sans MS", "Segoe UI", sans-serif;
+      overflow: hidden;
+      color: white;
+    }
+
+    /* sao nền */
+    .star {
+      position: fixed;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: twinkle 2.5s infinite ease-in-out;
+      pointer-events: none;
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    .card {
+      background: rgba(255,255,255,0.14);
+      border-radius: 22px;
+      padding: 40px 30px;
+      text-align: center;
+      width: 360px;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.35);
+      backdrop-filter: blur(6px);
+      z-index: 10;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    .gift {
+      font-size: 54px;
+      cursor: pointer;
+      margin: 25px 0;
+      transition: transform 0.2s;
+    }
+    .gift:hover {
+      transform: scale(1.25) rotate(-8deg);
+    }
+    .gift.open {
+      animation: pop 0.5s ease;
+    }
+    @keyframes pop {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.55); }
+      100% { transform: scale(1); }
+    }
+
+    #msg {
+      display: none;
+      margin-top: 15px;
+      font-size: 20px;
+      color: #ffd966;
+    }
+
+    /* tuyết */
+    .snow {
+      position: fixed;
+      top: -10px;
+      font-size: 18px;
+      animation: fall linear;
+      color: white;
+      pointer-events: none;
+      opacity: 0.95;
+    }
+    @keyframes fall {
+      to { transform: translateY(110vh); }
+    }
+    @keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+  </style>
+</head>
+
+<body>
+  <!-- card -->
+  <div class="card">
+    <h1>🎄 Merry Christmas 🎄</h1>
+    <p>
+      Chúc Thúy có một giáng sinh vui vẻ<br>
+            và hạnh phúc nhóe :3  
+    </p>
+
+    <div class="gift" onclick="openGift()">🎁</div>
+    <div id="msg">💌 về rùi lấy nha =))))) </div>
+  </div>
+
+  <script>
+    /* tạo sao nền */
+    const STAR_COUNT = 120;
+    for (let i = 0; i < STAR_COUNT; i++) {
+      const star = document.createElement("div");
+      star.className = "star";
+      star.style.left = Math.random() * window.innerWidth + "px";
+      star.style.top = Math.random() * window.innerHeight + "px";
+      star.style.animationDelay = Math.random() * 3 + "s";
+      document.body.appendChild(star);
+    }
+
+    function openGift() {
+      const gift = document.querySelector(".gift");
+      gift.classList.add("open");
+      setTimeout(() => {
+        document.getElementById("msg").style.display = "block";
+      }, 400);
+    }
+
+    /* TUYẾT RƠI NHIỀU */
+    setInterval(() => {
+      for (let i = 0; i < 3; i++) {
+        const snow = document.createElement("div");
+        snow.className = "snow";
+        snow.innerText = Math.random() > 0.7 ? "✨" : "❄";
+        snow.style.left = Math.random() * window.innerWidth + "px";
+        snow.style.fontSize = (Math.random() * 12 + 14) + "px";
+        snow.style.animationDuration = (Math.random() * 3 + 2) + "s";
+        document.body.appendChild(snow);
+        setTimeout(() => snow.remove(), 6500);
+      }
+    }, 140);
+  </script>
+</body>
+</html>
